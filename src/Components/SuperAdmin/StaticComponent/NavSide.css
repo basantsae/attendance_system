@@ -1,0 +1,13 @@
+.custom-sidebar {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .custom-navbar {
+    background-color: #444;
+    color: #fff;
+  }
+  
+  .custom-content {
+    padding: 20px;
+  }
