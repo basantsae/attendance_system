@@ -111,7 +111,19 @@
       font-weight: 400;
       margin: 0;
   }
+
+  .filters {
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+    align-items: center;
+  }
   
+  @media (max-width: 768px) {
+    .filters {
+      flex-direction: column;
+    }
+  }
   /* src/DateRangePicker.css */
   .date-range-picker {
     display: flex;

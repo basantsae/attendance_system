@@ -87,9 +87,10 @@
     
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Components/LoginPages/Login';
+import Login from './Components/Login_outPage/Login';
 import SuperAdminRoute from './Components/Routes/SuperAdminRoute';
 import AdminRoute from './Components/Routes/AdminRoute';
+import ProtectedRoute from './Components/Auth/ProtectedRoute';
 
 
 function App() {
@@ -99,6 +100,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/superadmin/*" element={<SuperAdminRoute />} />
         <Route path="/admin/*" element={<AdminRoute />} />
+
+        
       </Routes>
     </Router>
   );

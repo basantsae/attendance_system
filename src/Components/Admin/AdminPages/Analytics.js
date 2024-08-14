@@ -135,7 +135,7 @@ function Analytics({ data, originalData }) {
 
           <hr />
 
-          <div className="metric-selector">
+         <div className="metric-selector">
             <label style={{color:"rgb(136, 132, 216)"}}>
               <input
                 type="checkbox"
@@ -180,7 +180,7 @@ function Analytics({ data, originalData }) {
                 {selectedMetrics.earlyCheckOut && <Line type="monotone" dataKey="earlyCheckOut" stroke="#ffc658" />}
               </LineChart>
             </ResponsiveContainer>
-          </div>
+          </div> 
 
           <hr />
 
@@ -218,43 +218,39 @@ function Analytics({ data, originalData }) {
           <hr />
 
           <div className="attendance-table" id="table-section">
-            <table border="1" style={{ width: '100%', marginTop: '20px' }}>
+          <table border="1" style={{ width: '100%', marginTop: '20px' }}>
               <thead>
                 <tr>
                   <th>No.</th>
                   <th>Name</th>
-                  <th>In Date</th>
+                  <th>Date</th>
                   <th>In Time</th>
-                  <th>Out Date</th>
                   <th>Out Time</th>
                   <th>Work Hour</th>
                   <th>Over Time</th>
                   <th>Late Time</th>
-                  <th>Early Out Time</th>
-                  <th>In Location</th>
-                  <th>Out Location</th>
+                  <th>Location</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredData.length === 0 ? (
                   <tr>
-                    <td colSpan="12" style={{ textAlign: 'center' }}>No data available in table</td>
+                    <td colSpan="10" style={{ textAlign: 'center' }}>No data available in table</td>
                   </tr>
                 ) : (
                   filteredData.slice(0, rowsToShow).map((item, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
                       <td>{item.name}</td>
-                      <td>{item.inDate}</td>
+                      <td>{item.date}</td>
                       <td>{item.inTime}</td>
-                      <td>{item.outDate}</td>
                       <td>{item.outTime}</td>
                       <td>{item.workHour}</td>
                       <td>{item.overTime}</td>
                       <td>{item.lateTime}</td>
-                      <td>{item.earlyOutTime}</td>
-                      <td>{item.inLocation}</td>
-                      <td>{item.outLocation}</td>
+                      <td>{item.location}</td>
+                      <td>{item.status}</td>
                     </tr>
                   ))
                 )}

@@ -39,7 +39,7 @@ function AdminNavbar({setExpanded,onUserName }) {
   return (
     <>
     <nav className="bg-bgcolor text-white p-4 flex items-center gap-5" style={{width:"100%" , position:"fixed"}}>
-      <div style={{display:"flex"}}>
+      <div style={{display:"flex",gap:"5px"}}>
       <button
         onClick={() => setExpanded(curr => !curr)}
         className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
@@ -51,7 +51,7 @@ function AdminNavbar({setExpanded,onUserName }) {
 
 
       <div className="relative" style={{display:"flex",alignItems:"center"}}>
-        <button onClick={toggleUserInfo} className="p-2 rounded-md">
+        <button onClick={toggleUserInfo} className="rounded-md">
           <div className="user-panel flex items-center justify-center">
             <div className="image">
               <img

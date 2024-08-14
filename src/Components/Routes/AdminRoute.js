@@ -8,15 +8,17 @@ import Attendances from '../Admin/AdminPages/Attendences';
 import Analytics from '../Admin/AdminPages/Analytics'; 
 import UsersList from '../Admin/AdminPages/UsersList'; 
 import ADD_Update_Users from '../Admin/AdminPages/ADD_Update_Users'; 
-import ImportCSV from '../Admin/AdminPages/ImportCSV'
 import AreasList from '../Admin/AdminPages/AreasList';
 import EditAreas from '../Admin/AdminPages/EditAreas';
 import ShiftsList from '../Admin/AdminPages/ShiftsList';
 import EditShifts from '../Admin/AdminPages/EditShifts';
 import Events from '../Admin/AdminPages/Events'; 
-import Settings from '../Admin/AdminPages/Settings'; 
-import Profile from '../Admin/AdminPages/Profile'; // Ensure this component exists
+import Profile from '../Admin/AdminPages/Profile';
+import AddMeetings  from '../Admin/AdminPages/AddMeetings'; 
+import MeetingList from '../Admin/AdminPages/MeetingList'; 
 import { initialUsers } from '../Admin/AdminServices/Data';
+import { initialMeetings } from '../Admin/AdminServices/Data';
+
 
 // import LogOut from './LogOut'; // Ensure this component exists
 
@@ -28,34 +30,31 @@ function SuperAdminRoute() {
     };
   
     const data = [
-      { 
-        name: "John Doe", 
-        inDate: "2023-01-01", 
-        inTime: "08:00", 
-        outDate: "2023-01-01", 
-        outTime: "17:00", 
-        workHour: "8", 
-        overTime: "0", 
-        lateTime: "0", 
-        earlyOutTime: "0", 
-        inLocation: "Office A", 
-        outLocation: "Office A" 
+      {
+        name: "John Doe",
+        date: "2023-01-01",
+        inTime: "08:00",
+        outTime: "17:00",
+        workHour: "2",
+        overTime: "0",
+        lateTime: "0.5",
+        location: "Office A",
+        status: "Presence" // Example status
       },
-      { 
-        name: "Jane Doe", 
-        inDate: "2023-01-02", 
-        inTime: "08:30", 
-        outDate: "2023-01-02", 
-        outTime: "17:00", 
-        workHour: "7.5", 
-        overTime: "0.5", 
-        lateTime: "0.5", 
-        earlyOutTime: "0", 
-        inLocation: "Office B", 
-        outLocation: "Office B" 
+      {
+        name: "Jane Doe",
+        date: "2023-01-02",
+        inTime: "08:30",
+        outTime: "17:00",
+        workHour: "7.5",
+        overTime: "0.5",
+        lateTime: "0.5",
+        location: "Office B",
+        status: "Delay" // Example status
       },
       // Add more sample data as needed
     ];
+    
   
     // Aggregating the data
     const aggregateData = (data) => {
@@ -73,18 +72,27 @@ function SuperAdminRoute() {
   const chartData = Object.values(aggregateData(data));
 
   const [users, setUsers] = useState(initialUsers);
-
   const addUser = (user) => {
     user.id = users.length + 1;
     setUsers([...users, user]);
   };
-
   const editUser = (updatedUser) => {
     setUsers(users.map((user) => (user.id === updatedUser.id ? updatedUser : user)));
   };
-
   const deleteUser = (id) => {
     setUsers(users.filter((user) => user.id !== id));
+  };
+
+  const [meetings, setMeetings] = useState(initialMeetings);
+  const addmeeting = (meeting) => {
+    meeting.id = meetings.length + 1;
+    setMeetings([...meetings, meeting]);
+  };
+  const editmeeting = (updatedMeeting) => {
+    setMeetings(meetings.map((meeting) => (meeting.id === updatedMeeting.id ? updatedMeeting : meeting)));
+  };
+  const deletemeeting = (id) => {
+    setMeetings(meetings.filter((meeting) => meeting.id !== id));
   };
 
   
@@ -108,13 +116,16 @@ function SuperAdminRoute() {
               <Route path="/add_update" element={<ADD_Update_Users users={users} addUser={addUser} editUser={editUser}/>} />
               <Route path="/add/:id" element={<ADD_Update_Users users={users} addUser={addUser} editUser={editUser}/>} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/importcsv" element={<ImportCSV/>} />
               <Route path="/areaList" element={<AreasList/>} />
               <Route path="/areaEdit" element={<EditAreas />} />
               <Route path="/shiftList" element={<ShiftsList/>} />
               <Route path="/shiftEdit" element={<EditShifts />} />
               <Route path="/events" element={<Events />} />
-              <Route path="/settings" element={<Settings />} />
+
+              <Route path="/meeting" element={<MeetingList meetings={meetings} deleteMeeting={deletemeeting}/>} />
+              <Route path="/addMeeting" element={<AddMeetings meetings={meetings} addMeeting={addmeeting} editMeeting={editmeeting}/>} />
+              <Route path="/editMeeting/:id" element={<AddMeetings meetings={meetings} addMeeting={addmeeting} editMeeting={editmeeting}/>} />
+
               {/*
               <Route path="/logout" element={<LogOut />} />  */}
           </Routes>
