@@ -16,8 +16,14 @@ import Events from '../Admin/AdminPages/Events';
 import Profile from '../Admin/AdminPages/Profile';
 import AddMeetings  from '../Admin/AdminPages/AddMeetings'; 
 import MeetingList from '../Admin/AdminPages/MeetingList'; 
+import Vacations from '../Admin/AdminPages/Vacations';
+import VacationDetails from '../Admin/AdminPages/VacationDetails';
+import Salaries from '../Admin/AdminPages/Salaries';
 import { initialUsers } from '../Admin/AdminServices/Data';
 import { initialMeetings } from '../Admin/AdminServices/Data';
+import {generateFakeVacations} from '../Admin/AdminServices/Data';
+
+
 
 
 // import LogOut from './LogOut'; // Ensure this component exists
@@ -94,9 +100,18 @@ function SuperAdminRoute() {
   const deletemeeting = (id) => {
     setMeetings(meetings.filter((meeting) => meeting.id !== id));
   };
-
   
   const [isExpanded, setExpanded] = useState(true);
+
+  const [vacations, setVacations] = useState(generateFakeVacations());
+
+  const updateVacationStatus = (id, newStatus) => {
+    setVacations((prevVacations) =>
+      prevVacations.map((vacation) =>
+        vacation.id === id ? { ...vacation, status: newStatus } : vacation
+      )
+    );
+  };
  
   return (
     <div className="flex">
@@ -125,6 +140,14 @@ function SuperAdminRoute() {
               <Route path="/meeting" element={<MeetingList meetings={meetings} deleteMeeting={deletemeeting}/>} />
               <Route path="/addMeeting" element={<AddMeetings meetings={meetings} addMeeting={addmeeting} editMeeting={editmeeting}/>} />
               <Route path="/editMeeting/:id" element={<AddMeetings meetings={meetings} addMeeting={addmeeting} editMeeting={editmeeting}/>} />
+
+              {/* <Route path='/vacation' element={<Vacations/>}/> */}
+              <Route path='/salaries' element={<Salaries/>}/>
+
+              <Route path="/vacation" element={<Vacations vacations={vacations} /> }/>
+      
+              <Route path="/vacation/:id" element={<VacationDetails vacations={vacations} updateVacationStatus={updateVacationStatus} />}/>
+                
 
               {/*
               <Route path="/logout" element={<LogOut />} />  */}

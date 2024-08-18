@@ -6,7 +6,9 @@ const SidebarContext = createContext();
 export default function AdminSidebar({ children, expanded }) {
   return (
     <aside className={`h-screen fixed ${expanded ? 'w-64' : 'w-16'} transition-all duration-300`}>
-      <nav className="h-full flex flex-col border-r shadow-sm bg-white text-black">
+      <nav className="h-full flex flex-col border-r shadow-sm bg-white text-black"
+        style={{    overflowY: "scroll",
+        scrollBehavior: "smooth"}}>
         <div style={{ height: 68 }} className="p-4 pb-2 flex gap-2 items-center bg-bgcolor">
         <img
                 src="https://afl.muliatech.web.id/img/xlogo.png.pagespeed.ic.TmJe1NYsoE.webp"

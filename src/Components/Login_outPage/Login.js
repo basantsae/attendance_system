@@ -9,9 +9,9 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(''); // Clear previous errors
 
     try {
-      // Replace this with your actual API call
       const response = await fetch('https://ahmedwego.com/admin/login', {
         method: 'POST',
         headers: {
@@ -22,24 +22,23 @@ function Login() {
 
       const data = await response.json();
 
-    //   if (data.success) {
-    //     // Assuming your API returns the user role in the response
-    //     const { role } = data;
+      if (response.ok) {
+        const { role } = data;
 
-        // Store the user data in localStorage or any state management solution
+        // Store the user data in localStorage
         localStorage.setItem('user', JSON.stringify(data));
 
-        navigate('/admin/*');
-
         // Redirect based on role
-        // if (role === 'super') {
-        //   navigate('/superadmin/*');
-        // } else if (role === 'admin') {
-        //   navigate('/admin/*');
-        // }
-    //   } else {
-    //     setError(data.message);
-    //   }
+        if (role === 'super') {
+          navigate('/superadmin/*');
+        } else if (role === 'admin') {
+          navigate('/admin/*');
+        } else {
+          navigate('/admin/*'); // Default redirect if role is not explicitly defined
+        }
+      } else {
+        setError(data.message || 'Login failed. Please try again.');
+      }
     } catch (error) {
       setError('Failed to login. Please try again.');
     }
@@ -49,34 +48,38 @@ function Login() {
     <div className="flex justify-center items-center h-screen">
       <div className="bg-white p-6 rounded shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
-      <form onSubmit={handleLogin}>
-      <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        {error && <p>{error}</p>}
-        <button type="submit"
+        <form onSubmit={handleLogin}>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+          <button
+            type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >Login</button>
-      </form>
-    </div>
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

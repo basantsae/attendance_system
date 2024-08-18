@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate} from 'react-router-dom'; // Import these hooks
-// import Navbar from "../component/Navbar";
-// import Sidebar from "../component/Sidebar";
+import { useNavigate} from 'react-router-dom'; 
 import { SidebarItem } from "../NavSidecomponent/AdminSidebar";
 import icon_a from '../AdminImgs/icons8-meeting-30.png'
+import vacation from '../AdminImgs/booking.png'
+import Salary from '../AdminImgs/icons8-paycheque-30.png'
 import {
   ChevronDown,
   ChevronLeft,
@@ -14,10 +14,9 @@ import {
   Shuffle,
   LogOut,
   UserRoundCheck,
-  Settings,
   UsersRound,
   Calendar,
-  List,SquarePen,FolderUp
+  List,SquarePen
 } from "lucide-react";
 
 function AdminNavSide() {
@@ -28,7 +27,6 @@ function AdminNavSide() {
     const [activeItem, setActiveItem] = useState('dashboard'); // State to manage the active sidebar item
     
     const navigate = useNavigate();
-    // const location = useLocation();
 
     // Function to handle item click
     const handleItemClick = (item) => {
@@ -45,8 +43,8 @@ function AdminNavSide() {
     };
     
   return (
-    <>
-                <SidebarItem
+      <>
+            <SidebarItem
               icon={<LayoutDashboard size={30} />}
               text="Dashboard"
               active={activeItem === 'adminDashboard'} // Check if item is active
@@ -68,15 +66,15 @@ function AdminNavSide() {
               }
               onClick={() => toggleArrow('areas')}
             />
-       {expandedAreas && (
-        <>
-          <SidebarItem icon={<List size={30} />} text="List" active={activeItem === 'areaList'} 
-              onClick={() => handleItemClick('areaList')}/>
-          <SidebarItem icon={<SquarePen size={30} />} text="Add or Update" active={activeItem === 'areaEdit'} 
-              onClick={() => handleItemClick('areaEdit')}/>
-          {/* Add more items as needed */}
-        </>
-      )}
+                {expandedAreas && (
+                  <>
+                    <SidebarItem icon={<List size={30} />} text="List" active={activeItem === 'areaList'} 
+                        onClick={() => handleItemClick('areaList')}/>
+                    <SidebarItem icon={<SquarePen size={30} />} text="Add or Update" active={activeItem === 'areaEdit'} 
+                        onClick={() => handleItemClick('areaEdit')}/>
+                    {/* Add more items as needed */}
+                  </>
+                )}
             <SidebarItem
               icon={<Shuffle size={30} />}
               text="Shifts"
@@ -90,17 +88,17 @@ function AdminNavSide() {
               onClick={() => toggleArrow('shifts')}
             />
 
-     {expandedShifts && (
-        <>
-          <SidebarItem icon={<List size={30} />} text="List" active={activeItem === 'shiftList'} 
-              onClick={() => handleItemClick('shiftList')}/>
-          <SidebarItem icon={<SquarePen size={30} />} text="Add or Update" active={activeItem === 'shiftEdit'} 
-              onClick={() => handleItemClick('shiftEdit')}/>
-          {/* Add more items as needed */}
-        </>
-      )}
+              {expandedShifts && (
+                  <>
+                    <SidebarItem icon={<List size={30} />} text="List" active={activeItem === 'shiftList'} 
+                        onClick={() => handleItemClick('shiftList')}/>
+                    <SidebarItem icon={<SquarePen size={30} />} text="Add or Update" active={activeItem === 'shiftEdit'} 
+                        onClick={() => handleItemClick('shiftEdit')}/>
+                    {/* Add more items as needed */}
+                  </>
+                )}
 
-<SidebarItem
+            <SidebarItem
               icon={<img alt='' src={icon_a}/>}
               text="Meeting"
               arrow={
@@ -112,15 +110,15 @@ function AdminNavSide() {
               }
               onClick={() => toggleArrow('meetings')}
             />
-     {expandedMeetings && (
-        <>
-          <SidebarItem icon={<List size={30} />} text="Meeting List"  active={activeItem === 'meeting'} 
-              onClick={() => handleItemClick('meeting')}  />
-          <SidebarItem icon={<SquarePen size={30} />} text="Add New Meeting"  active={activeItem === 'addMeeting'} 
-              onClick={() => handleItemClick('addMeeting')} />
-          {/* Add more items as needed */}
-        </>
-      )}
+              {expandedMeetings && (
+                  <>
+                    <SidebarItem icon={<List size={30} />} text="Meeting List"  active={activeItem === 'meeting'} 
+                        onClick={() => handleItemClick('meeting')}  />
+                    <SidebarItem icon={<SquarePen size={30} />} text="Add New Meeting"  active={activeItem === 'addMeeting'} 
+                        onClick={() => handleItemClick('addMeeting')} />
+                    {/* Add more items as needed */}
+                  </>
+                )}
         
             <SidebarItem icon={<Calendar size={30} />} text="Events" active={activeItem === 'events'} 
               onClick={() => handleItemClick('events')} />
@@ -136,22 +134,28 @@ function AdminNavSide() {
               }
               onClick={() => toggleArrow('users')}
             />
-     {expandedUsers && (
-        <>
-          <SidebarItem icon={<List size={30} />} text="Employees List"  active={activeItem === 'users'} 
-              onClick={() => handleItemClick('users')}  />
-          <SidebarItem icon={<SquarePen size={30} />} text="Add or Update"  active={activeItem === 'add_update'} 
-              onClick={() => handleItemClick('add_update')} />
-          {/* Add more items as needed */}
-        </>
-      )}
-        <SidebarItem icon={<UserRoundCheck size={30} />} text="Profile" active={activeItem === 'profile'} 
-          onClick={() => handleItemClick('profile')} />
-        <SidebarItem icon={<LogOut size={30} />} text="LogOut" />
+            {expandedUsers && (
+                <>
+                  <SidebarItem icon={<List size={30} />} text="Employees List"  active={activeItem === 'users'} 
+                      onClick={() => handleItemClick('users')}  />
+                  <SidebarItem icon={<SquarePen size={30} />} text="Add or Update"  active={activeItem === 'add_update'} 
+                      onClick={() => handleItemClick('add_update')} />
+                  {/* Add more items as needed */}
+                </>
+              )}
+          <SidebarItem icon={<UserRoundCheck size={30} />} text="Profile" active={activeItem === 'profile'} 
+            onClick={() => handleItemClick('profile')} />
+
+          <SidebarItem icon={<img alt='' src={vacation}/>} text="Vacations" active={activeItem === 'vacation'} 
+                      onClick={() => handleItemClick('vacation')} />
+
+          <SidebarItem icon={<img alt='' src={Salary}/>} text="Salaries" active={activeItem === 'salaries'} 
+                      onClick={() => handleItemClick('salaries')} />
+
+          <SidebarItem icon={<LogOut size={30} />} text="LogOut" />
 
 
-        
-</>
+      </>
   );
 }
 
