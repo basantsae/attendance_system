@@ -41,14 +41,14 @@ function PlansList({ plans, deletePlan }) {
                     <td>{plan.price}</td>
                     <td>{plan.numberOfEmployees}</td>
                     <td>
-                       <div className="action-buttons">
+                      <div className="action-buttons">
                         <Link to={`/superadmin/edit-plans/${plan.id}`} className="action-btn edit-btn">
                             <i className="fa fa-edit"></i> Edit
                         </Link>
                         <button onClick={() => handleDelete(plan.id)} className="action-btn delete-btn">
                             <i className="fa fa-trash"></i> Delete
                         </button>
-                        </div>
+                      </div>
                     </td>
                   </tr>
                 ))
