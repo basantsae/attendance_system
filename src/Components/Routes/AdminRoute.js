@@ -19,9 +19,11 @@ import MeetingList from '../Admin/AdminPages/MeetingList';
 import Vacations from '../Admin/AdminPages/Vacations';
 import VacationDetails from '../Admin/AdminPages/VacationDetails';
 import Salaries from '../Admin/AdminPages/Salaries';
+import SalaryDetails from '../Admin/AdminPages/SalaryDetails';
 import { initialUsers } from '../Admin/AdminServices/Data';
 import { initialMeetings } from '../Admin/AdminServices/Data';
 import {generateFakeVacations} from '../Admin/AdminServices/Data';
+import { generateFakeSalaries } from '../Admin/AdminServices/Data';
 
 
 
@@ -104,7 +106,6 @@ function SuperAdminRoute() {
   const [isExpanded, setExpanded] = useState(true);
 
   const [vacations, setVacations] = useState(generateFakeVacations());
-
   const updateVacationStatus = (id, newStatus) => {
     setVacations((prevVacations) =>
       prevVacations.map((vacation) =>
@@ -112,7 +113,26 @@ function SuperAdminRoute() {
       )
     );
   };
+
+
+  // const [salaries, setSalaries] = useState(generateFakeSalaries());
+  // const updateSalariesStatus = (id, newStatus) => {
+  //   setSalaries((prevSalary) =>
+  //     prevSalary.map((salary) =>
+  //       salary.id === id ? { ...salary, status: newStatus } : salary
+  //     )
+  //   );
+  // };
  
+  const [salaries, setSalaries] = useState(generateFakeSalaries(5, 3)); // Example initialization
+
+  const handleStatusChange = (id) => {
+    setSalaries((prevSalaries) =>
+      prevSalaries.map((salary) =>
+        salary.id === id ? { ...salary, status: 'Paid' } : salary
+      )
+    );
+  };
   return (
     <div className="flex">
       <AdminSidebar expanded={isExpanded} >
@@ -142,10 +162,11 @@ function SuperAdminRoute() {
               <Route path="/editMeeting/:id" element={<AddMeetings meetings={meetings} addMeeting={addmeeting} editMeeting={editmeeting}/>} />
 
               {/* <Route path='/vacation' element={<Vacations/>}/> */}
-              <Route path='/salaries' element={<Salaries/>}/>
+              <Route path='/salaries' element={<Salaries salaries={salaries}/>}/>
+              <Route path="/salaries/:employeeId" element={<SalaryDetails salaries={salaries} onStatusChange={handleStatusChange}/>}/>
+
 
               <Route path="/vacation" element={<Vacations vacations={vacations} /> }/>
-      
               <Route path="/vacation/:id" element={<VacationDetails vacations={vacations} updateVacationStatus={updateVacationStatus} />}/>
                 
 

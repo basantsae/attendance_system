@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const VacationDetails = ({ vacations, updateVacationStatus }) => {
+  const VacationDetails = ({ vacations, updateVacationStatus }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const vacation = vacations.find((v) => v.id === parseInt(id));
